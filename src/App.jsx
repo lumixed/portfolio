@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Github, Linkedin, Mail, Phone, ExternalLink, Code, Briefcase, GraduationCap, Award, User, ChevronDown, Sparkles, Terminal, Zap, Rocket, Star, FileText } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, ExternalLink, Code, Briefcase, GraduationCap, Award, Sparkles, Terminal, Zap, Rocket, Star } from 'lucide-react';
 
 export default function Portfolio() {
     const [activeSection, setActiveSection] = useState('hero');
