@@ -8,8 +8,8 @@ export const portfolioData = {
     // ----------------------------------------------------------
     name: "Jefferson Abraham Dermawan",
     shortName: "Jefferson",
-    title: "Backend Engineer & CS Student",
-    greeting: "Hi, I'm Jefferson 👋",
+    title: "Software Engineer",
+    greeting: "Hi, I'm Jefferson",
     tagline: "I build high-performance systems and elegant solutions.",
 
     bio: `I'm a second-year Computer Science student at the University of British Columbia (UBC), specializing in backend engineering and competitive programming. I love tackling hard algorithmic challenges and shipping production-ready systems. Currently working part-time as a Backend Engineer at Lintel AI, while TAing CPSC 121 at UBC.`,
@@ -60,8 +60,8 @@ export const portfolioData = {
     // ACCOMPLISHMENTS
     // ----------------------------------------------------------
     accomplishments: [
-        "🏆 Awarded a full-ride scholarship to pursue undergraduate studies at UBC",
-        "🥇 Ranked Top 32 competitive programmer nationally in the 2022 Indonesian National Olympiad in Informatics (IOI)",
+        "Awarded a full-ride scholarship to pursue undergraduate studies at UBC",
+        "Ranked Top 32 competitive programmer nationally in the 2022 Indonesian National Olympiad in Informatics (IOI)",
     ],
 
     // ----------------------------------------------------------
@@ -91,7 +91,7 @@ export const portfolioData = {
             ],
             github: "https://github.com/lumixed/awardscope",
             live: "https://awardscope.vercel.app",
-            emoji: "🚀",
+            emoji: "",
             color: "#38bdf8",
         },
         {
@@ -106,7 +106,7 @@ export const portfolioData = {
             ],
             github: "https://github.com/lumixed/travelio",
             live: "",
-            emoji: "✈️",
+            emoji: "",
             color: "#a78bfa",
         },
     ],
@@ -121,7 +121,7 @@ export const portfolioData = {
             location: "Vancouver, BC",
             period: "February 2026 – Present",
             type: "Part-time",
-            emoji: "💻",
+            emoji: "",
             points: [
                 "Built Django REST APIs for production features used by internal tools and customer-facing workflows",
                 "Designed database schemas and optimized queries, improving API response times and reliability",
@@ -135,7 +135,7 @@ export const portfolioData = {
             location: "Vancouver, BC",
             period: "January 2026 – Present",
             type: "",
-            emoji: "📚",
+            emoji: "",
             points: [
                 "Led weekly labs for 40+ students covering Boolean algebra, logic, DFAs, and proof techniques",
                 "Instructed weekly discussion sections covering logic, automata, and proof-based problem solving",
@@ -148,7 +148,7 @@ export const portfolioData = {
             location: "Indonesia",
             period: "September 2024 – June 2025",
             type: "",
-            emoji: "🏆",
+            emoji: "",
             points: [
                 "Coached 100+ students in C++ algorithmic problem-solving and data structures",
                 "Designed online practice sessions focused on problem decomposition and optimization",

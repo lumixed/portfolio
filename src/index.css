@@ -199,7 +199,7 @@ a {
     line-height: 1.1;
 }
 
-.hero-avatar {}
+
 
 .hero-input-wrap {
     width: 100%;
@@ -225,8 +225,8 @@ a {
 }
 
 .avatar-ring {
-    width: 132px;
-    height: 132px;
+    width: 184px;
+    height: 184px;
     border-radius: 50%;
     padding: 0;
     background: transparent;
@@ -747,8 +747,8 @@ a {
     }
 
     .avatar-ring {
-        width: 110px;
-        height: 110px;
+        width: 150px;
+        height: 150px;
     }
 
     .chat-input {

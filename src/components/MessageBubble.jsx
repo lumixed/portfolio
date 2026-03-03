@@ -85,16 +85,16 @@ function ContactCard({ contact }) {
     return (
         <div className="msg-contact-card">
             <a href={`mailto:${contact.email}`} className="msg-contact-link">
-                ✉️ {contact.email}
+                {contact.email}
             </a>
             <a href={contact.github} target="_blank" rel="noopener noreferrer" className="msg-contact-link">
-                🐙 GitHub — {contact.github.replace("https://", "")}
+                GitHub — {contact.github.replace("https://", "")}
             </a>
             <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="msg-contact-link">
-                💼 LinkedIn — {contact.linkedin.replace("https://", "")}
+                LinkedIn — {contact.linkedin.replace("https://", "")}
             </a>
             <span className="msg-contact-link" style={{ cursor: "default" }}>
-                📍 {contact.location}
+                {contact.location}
             </span>
         </div>
     );
@@ -161,7 +161,6 @@ export default function MessageBubble({ message }) {
             <div className="bubble assistant-bubble">
                 {r.heading && (
                     <div className="msg-heading">
-                        {r.emoji && <span className="msg-heading-emoji">{r.emoji}</span>}
                         {r.heading}
                     </div>
                 )}

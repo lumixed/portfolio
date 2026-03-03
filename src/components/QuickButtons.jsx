@@ -1,11 +1,11 @@
 import React from "react";
 
 const QUICK_BUTTONS = [
-    { label: "👤 Me", query: "who are you?" },
-    { label: "🚀 Projects", query: "show me your projects" },
-    { label: "⚡ Skills", query: "what skills do you have?" },
-    { label: "💼 Experience", query: "what is your experience?" },
-    { label: "📬 Contact", query: "how can I contact you?" },
+    { label: "Me", query: "who are you?" },
+    { label: "Projects", query: "show me your projects" },
+    { label: "Skills", query: "what skills do you have?" },
+    { label: "Experience", query: "what is your experience?" },
+    { label: "Contact", query: "how can I contact you?" },
 ];
 
 export default function QuickButtons({ onSelect }) {

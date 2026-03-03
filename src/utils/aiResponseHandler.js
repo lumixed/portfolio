@@ -23,7 +23,7 @@ const RULES = [
             type: "text",
             heading: `About ${p.shortName}`,
             content: p.bio,
-            emoji: "🧑‍💻",
+            emoji: "",
         }),
     },
     {
@@ -32,7 +32,7 @@ const RULES = [
             type: "projects",
             heading: "Projects",
             content: p.projects,
-            emoji: "🚀",
+            emoji: "",
         }),
     },
     {
@@ -41,7 +41,7 @@ const RULES = [
             type: "skills",
             heading: "Technical Skills",
             content: p.skills,
-            emoji: "⚡",
+            emoji: "",
         }),
     },
     {
@@ -50,7 +50,7 @@ const RULES = [
             type: "experience",
             heading: "Work Experience",
             content: p.experience,
-            emoji: "💼",
+            emoji: "",
         }),
     },
     {
@@ -59,7 +59,7 @@ const RULES = [
             type: "contact",
             heading: "Get in Touch",
             content: p.contact,
-            emoji: "📬",
+            emoji: "",
         }),
     },
     {
@@ -68,7 +68,7 @@ const RULES = [
             type: "text",
             heading: "Resume",
             content: `You can view or download my resume here:`,
-            emoji: "📄",
+            emoji: "",
             link: { label: "Open Resume →", url: p.resumeUrl },
         }),
     },
@@ -78,7 +78,7 @@ const RULES = [
             type: "education",
             heading: "Education",
             content: p.education,
-            emoji: "🎓",
+            emoji: "",
         }),
     },
     {
@@ -87,7 +87,7 @@ const RULES = [
             type: "text",
             heading: "Accomplishments",
             content: p.accomplishments.join("\n\n"),
-            emoji: "🏆",
+            emoji: "",
         }),
     },
     {
@@ -95,8 +95,8 @@ const RULES = [
         resolve: () => ({
             type: "text",
             heading: null,
-            content: `Hey there! I'm ${p.shortName}'s AI assistant. Ask me anything about him — his projects, skills, experience, or how to get in touch. 😊`,
-            emoji: "👋",
+            content: `Hey there! I'm ${p.shortName}'s AI assistant. Ask me anything about him — his projects, skills, experience, or how to get in touch.`,
+            emoji: "",
         }),
     },
 ];
