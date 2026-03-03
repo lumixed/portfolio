@@ -3,10 +3,10 @@
 //
 //  Architecture:
 //  1. Rule-based keywords → rich structured responses (cards)
-//  2. Everything else    → Gemini API (real AI, free tier)
-//  3. No API key set     → friendly prompt to add one
+//  2. Everything else    → /api/chat (Vercel serverless proxy)
 //
-//  To enable: add REACT_APP_GEMINI_API_KEY to .env and restart
+//  The Gemini API key lives only on the server — never in the
+//  browser bundle. Set GEMINI_API_KEY in Vercel environment vars.
 // ============================================================
 
 import { portfolioData as p } from "../data/portfolioData";
@@ -86,72 +86,35 @@ Never say you don't know — always give a thoughtful answer.`;
 }
 
 // -----------------------------------------------------------
-//  Gemini API call with conversation history
+//  Secure AI call — proxied through Vercel serverless function
+//  The API key never leaves the server.
 // -----------------------------------------------------------
-const GEMINI_MODEL = "gemini-2.5-flash";
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-
 async function callGemini(query, history) {
-    const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
-    if (!apiKey || apiKey === "your-gemini-api-key-here") {
-        return {
-            type: "text",
-            heading: null,
-            content: `To enable real AI responses, add your free Gemini API key to the \`.env\` file:\n\n**REACT_APP_GEMINI_API_KEY=your-key**\n\nGet a free key at: aistudio.google.com/apikey — then restart \`npm start\`.`,
-        };
-    }
-
-    // Build conversation history in Gemini format
-    // Only include last 10 exchanges to stay within token limits
-    const recentHistory = history.slice(-20);
-    const contents = recentHistory
-        .filter((msg) => msg.role === "user" || (msg.role === "assistant" && msg.response?.type === "text"))
-        .map((msg) => {
-            if (msg.role === "user") {
-                return { role: "user", parts: [{ text: msg.text }] };
-            } else {
-                const text = msg.response?.content || "";
-                return { role: "model", parts: [{ text }] };
-            }
-        });
-
-    // Add the current query
-    contents.push({ role: "user", parts: [{ text: query }] });
-
-    const body = {
-        system_instruction: { parts: [{ text: buildSystemPrompt() }] },
-        contents,
-        generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 512,
-        },
-    };
-
     try {
-        const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+        const res = await fetch("/api/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
+            body: JSON.stringify({
+                query,
+                history,
+                systemPrompt: buildSystemPrompt(),
+            }),
         });
 
         if (!res.ok) {
             const errData = await res.json().catch(() => ({}));
-            const message = errData?.error?.message || `HTTP ${res.status}`;
+            const message = errData?.error || `HTTP ${res.status}`;
             throw new Error(message);
         }
 
         const data = await res.json();
-        const text =
-            data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-            "I couldn't generate a response. Please try again.";
-
-        return { type: "text", heading: null, content: text };
+        return { type: "text", heading: null, content: data.text };
     } catch (err) {
-        console.error("Gemini error:", err.message);
+        console.error("AI proxy error:", err.message);
         return {
             type: "text",
             heading: null,
-            content: `Something went wrong: ${err.message}. Check your API key and network.`,
+            content: `Something went wrong: ${err.message}. Please try again.`,
         };
     }
 }
