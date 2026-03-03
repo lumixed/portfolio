@@ -10,12 +10,10 @@ export default function App() {
     const handleSend = useCallback(async (query) => {
         if (!query.trim() || isTyping) return;
 
-        // Append the user message immediately
         const userMessage = { role: "user", text: query };
         setMessages((prev) => [...prev, userMessage]);
         setIsTyping(true);
 
-        // Simulate a short thinking delay (300–600ms)
         const delay = 350 + Math.random() * 300;
         await new Promise((r) => setTimeout(r, delay));
 
@@ -26,23 +24,13 @@ export default function App() {
 
     return (
         <div className="app-root">
-            {/* Ambient background blobs */}
-            <div className="bg-blob blob-1" />
-            <div className="bg-blob blob-2" />
-            <div className="bg-blob blob-3" />
-
-            {/* Grid overlay */}
-            <div className="bg-grid" />
-
-            {/* Content */}
             <main className="app-main">
                 <HeroSection onSend={handleSend} disabled={isTyping} />
                 <ChatWindow messages={messages} isTyping={isTyping} />
             </main>
 
-            {/* Footer */}
             <footer className="app-footer">
-                <span>© 2026 Jefferson Abraham Dermawan</span>
+                © 2026 Jefferson Abraham Dermawan
             </footer>
         </div>
     );

@@ -7,19 +7,19 @@ import { portfolioData } from "../data/portfolioData";
 export default function HeroSection({ onSend, disabled }) {
     return (
         <section className="hero-section">
-            {/* Name + Title */}
+            {/* Small label + large title */}
             <div className="hero-text fade-in-up" style={{ animationDelay: "0ms" }}>
-                <h1 className="hero-greeting">{portfolioData.greeting}</h1>
-                <p className="hero-tagline">{portfolioData.tagline}</p>
+                <p className="hero-greeting">{portfolioData.greeting}</p>
+                <h1 className="hero-tagline-title">{portfolioData.title}</h1>
             </div>
 
             {/* Avatar */}
-            <div className="hero-avatar fade-in-up" style={{ animationDelay: "120ms" }}>
+            <div className="hero-avatar fade-in-up" style={{ animationDelay: "100ms" }}>
                 <Avatar />
             </div>
 
-            {/* Chat input */}
-            <div className="hero-input-wrap fade-in-up" style={{ animationDelay: "240ms" }}>
+            {/* Chat input + quick buttons */}
+            <div className="hero-input-wrap fade-in-up" style={{ animationDelay: "200ms" }}>
                 <ChatInput onSend={onSend} disabled={disabled} />
                 <QuickButtons onSelect={onSend} />
             </div>
