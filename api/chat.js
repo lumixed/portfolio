@@ -6,7 +6,7 @@
 const GEMINI_MODEL = "gemini-2.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     // Only allow POST
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" });
