@@ -249,8 +249,6 @@ const RULES = [
             "birthday",
             "how old",
             "age",
-            "hobby",
-            "travel",
         ],
         resolve: () => ({
             type: "education",
