@@ -12,7 +12,32 @@ export const portfolioData = {
     greeting: "Hi, I'm Jefferson",
     tagline: "I build high-performance systems and elegant solutions.",
 
-    bio: `I'm a second-year Computer Science student at the University of British Columbia (UBC), specializing in backend engineering and competitive programming. I love tackling hard algorithmic challenges and shipping production-ready systems. Currently working part-time as a Backend Engineer at Lintel AI, while TAing CPSC 121 at UBC.`,
+    bio: `I'm a second-year Computer Science student at UBC (University of British Columbia), originally from Bandung, Indonesia. I focus on backend engineering and competitive programming—I'm especially strong in C++ and algorithmic problem solving. I work part-time as a Backend Engineer at Lintel AI and I'm a teaching assistant for CPSC 121. Most of my projects come from hackathons.`,
+
+    // Used by the portfolio AI for richer answers (birthday, hobbies, background)
+    personal: {
+        dateOfBirth: "December 12, 2006",
+        age: 19,
+        nationality: "Indonesian",
+        hometown: "Bandung, West Java, Indonesia",
+        highSchool: "SMAK 1 BPK Penabur Bandung",
+        hobbies: ["photography", "traveling"],
+        photography: {
+            instagramHandle: "@shutteredfilm",
+            instagramUrl: "https://instagram.com/shutteredfilm",
+            note: "Photography portfolio on Instagram",
+        },
+        competitiveProgramming: {
+            summary:
+                "Former competitive programmer in Indonesia. Ranked Top 32 nationally in the 2022 Indonesian National Olympiad in Informatics (NOI). Very strong in problem solving and C++.",
+        },
+        scholarship: {
+            summary:
+                "Received a full scholarship from the Indonesian government to study abroad. Was accepted to multiple prestigious universities worldwide and chose UBC.",
+        },
+        whyCanada:
+            "Moved to Canada for university; workload increased, so I stepped back from part-time competitive programming teaching in Indonesia.",
+    },
 
     // ----------------------------------------------------------
     // AVATAR — put your photo in /public/ and update the path
@@ -28,6 +53,7 @@ export const portfolioData = {
         github: "https://github.com/lumixed",
         linkedin: "https://linkedin.com/in/jeffersondermawan",
         location: "Vancouver, BC, Canada",
+        photographyInstagram: "https://instagram.com/shutteredfilm",
     },
 
     // ----------------------------------------------------------
@@ -42,16 +68,33 @@ export const portfolioData = {
         {
             school: "University of British Columbia",
             degree: "Bachelor of Science in Computer Science",
+            faculty: "Faculty of Science (Vancouver)",
             period: "Aug 2024 – Present",
-            gpa: "88.9% GPA · Dean's List",
+            yearStanding: "Second year",
+            gpa: "88.9% cumulative GPA · Dean's List",
+            transcriptNotes: [
+                "2024-25 Winter Session: session average 90.0%; cumulative average 90.0% for that period.",
+                "2025-26 Winter Session: session average 87.2% (some courses still in progress / grades pending).",
+            ],
             courses: [
-                "CPSC 110 — Computation, Programs & Programming",
+                "CPSC 110 — Computation, Programs, and Programming",
                 "CPSC 121 — Models of Computation",
-                "CPSC 213 — Computer Systems",
-                "CPSC 221 — Algorithms & Data Structures",
                 "CPSC 210 — Software Construction",
-                "CPSC 310 — Software Engineering",
-                "CPSC 313 — Hardware & Operating Systems",
+                "CPSC 213 — Introduction to Computer Systems",
+                "CPSC 221 — Basic Algorithms and Data Structures",
+                "CPSC 310 — Introduction to Software Engineering",
+                "CPSC 313 — Computer Hardware and Operating Systems",
+                "MATH 100 / 101 — Calculus",
+                "MATH 200 — Calculus III",
+                "MATH 221 — Matrix Algebra",
+                "STAT 251 — Elementary Statistics",
+                "PHYS 131 — Energy and Waves",
+                "ASTR 101 — Introduction to the Solar System",
+                "BIOL 121 — Genetics, Evolution and Ecology",
+                "ECON 101 — Principles of Microeconomics",
+                "ECON 102 — Principles of Macroeconomics",
+                "CHIN 131 / 133 — Basic Chinese I",
+                "SCIE 113 — First-Year Seminar in Science",
             ],
         },
     ],
@@ -60,8 +103,23 @@ export const portfolioData = {
     // ACCOMPLISHMENTS
     // ----------------------------------------------------------
     accomplishments: [
-        "Awarded a full-ride scholarship to pursue undergraduate studies at UBC",
-        "Ranked Top 32 competitive programmer nationally in the 2022 Indonesian National Olympiad in Informatics (IOI)",
+        "Full scholarship from the Indonesian government to study abroad; chose UBC over other prestigious acceptances",
+        "Top 32 nationally in the 2022 Indonesian National Olympiad in Informatics (NOI)",
+        "Dean's List at UBC",
+        "Second place ($6,000) — Find My Force (RF COP system), hackathon",
+        "Honorable mention — Best Use of Gemini AI, ProduHacks (PolterGuide)",
+    ],
+
+    hackathonWins: [
+        {
+            name: "Find My Force",
+            subtitle: "RF COP System",
+            prize: "Second place — $6,000",
+        },
+        {
+            name: "PolterGuide",
+            prize: "Honorable mention — Best Use of Gemini AI (ProduHacks)",
+        },
     ],
 
     // ----------------------------------------------------------
@@ -69,9 +127,9 @@ export const portfolioData = {
     // ----------------------------------------------------------
     skills: {
         Languages: ["Python", "Java", "C/C++", "TypeScript", "JavaScript", "HTML/CSS"],
-        Frameworks: ["React", "Node.js", "Express", "Django", "Flask"],
-        Tools: ["Git", "Docker", "GCP", "VS Code", "IntelliJ"],
-        Libraries: ["NumPy", "React Router", "Gemini API"],
+        Frameworks: ["React", "Node.js", "Express", "Django", "Flask", "FastAPI"],
+        Tools: ["Git", "Docker", "Docker Compose", "GCP", "VS Code", "IntelliJ", "Electron", "Vite", "Firebase", "MongoDB"],
+        Libraries: ["NumPy", "React Router", "Gemini API", "Framer Motion", "Leaflet", "WebSockets", "PyPDF", "uAgents (Fetch.ai)"],
     },
 
     // ----------------------------------------------------------
@@ -79,15 +137,33 @@ export const portfolioData = {
     // ----------------------------------------------------------
     projects: [
         {
+            title: "Travelio",
+            date: "January 2026",
+            event: "nwHacks",
+            description:
+                "Flight deal discovery app: cheapest flights from your city vs typical monthly prices, plus AI-generated itineraries. Finds deals, compares savings vs average fares, and uses Gemini for personalized trip plans.",
+            tech: ["React", "Vite", "CSS", "Node.js", "Express", "Python", "Amadeus Travel API", "Gemini API"],
+            highlights: [
+                "Flight discovery ranked by deal quality relative to average monthly pricing",
+                "Deal comparison vs typical pricing",
+                "AI itineraries via Gemini for any destination",
+            ],
+            github: "https://github.com/lumixed/Travelio",
+            live: "",
+            emoji: "",
+            color: "#a78bfa",
+        },
+        {
             title: "AwardScope",
             date: "February 2026",
+            event: "Hack the Coast",
             description:
-                "Full-stack web app matching BC post-secondary students with relevant scholarships using a ranking algorithm and AI personalization.",
-            tech: ["React", "TypeScript", "Node.js", "MongoDB"],
+                "Technical financial aid platform: matches students with scholarships and bursaries using matching logic and generative AI (eligibility, scoring, essay support). Monochrome, data-dense UI with Framer Motion.",
+            tech: ["React 18", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite", "Node.js", "Express", "MongoDB", "Gemini API", "Docker", "Docker Compose"],
             highlights: [
-                "Designed REST APIs and matching algorithm to rank awards by eligibility",
-                "Integrated Gemini API for personalized application advice",
-                "Containerized backend with Docker and deployed with migrations",
+                "Precision matching engine with real-time eligibility and probabilistic scoring",
+                "AI-assisted essay blueprints grounded in profile and award criteria",
+                "Dockerized stack; typical local ports frontend :8080, API :3001",
             ],
             github: "https://github.com/lumixed/awardscope",
             live: "https://awardscope.vercel.app",
@@ -95,19 +171,48 @@ export const portfolioData = {
             color: "#38bdf8",
         },
         {
-            title: "Travelio",
-            date: "January 2026",
+            title: "Find My Force",
+            date: "Hackathon project",
+            event: "RF COP System",
             description:
-                "AI-powered travel-planning web app built during a 24-hour hackathon, leveraging Amadeus and Gemini APIs.",
-            tech: ["Python", "React", "JavaScript", "CSS"],
+                "RF COP system project; team placed second and won $6,000.",
+            tech: [],
+            highlights: ["Second place finish — $6,000 prize"],
+            github: "",
+            live: "",
+            emoji: "🛰️",
+            color: "#22c55e",
+        },
+        {
+            title: "Safe Maps",
+            date: "2025",
+            description:
+                "Find the safest walking route in Vancouver—not just the fastest. Uses historical crime data (VPD GeoDASH) and street lighting density; night mode weights lighting more heavily.",
+            tech: ["React", "Vite", "Leaflet", "Node.js", "Express"],
             highlights: [
-                "Utilized Amadeus Travel API and Gemini API for itinerary generation",
-                "Handled slow API responses with async requests and response caching",
+                "Safety-first routing with multiple alternatives ranked by safety score",
+                "Crime-aware routing; optional night walking mode",
+                "API: GET /api/route with from, to, night query params",
             ],
-            github: "https://github.com/lumixed/travelio",
+            github: "",
             live: "",
             emoji: "",
-            color: "#a78bfa",
+            color: "#f97316",
+        },
+        {
+            title: "PolterGuide",
+            date: "ProduHacks",
+            description:
+                "Electron desktop app: agentic AI co-pilot as a transparent overlay with a 'Ghost Cursor' that navigates UIs from uploaded PDF docs—voice or chat driven. Honorable mention for Best Use of Gemini AI.",
+            tech: ["Electron", "React 19", "Vite", "Tailwind CSS v4", "Framer Motion", "Python", "FastAPI", "WebSockets", "Firebase", "Fetch.ai uAgents", "Google GenAI", "ElevenLabs", "Web Speech API"],
+            highlights: [
+                "Multi-agent backend (Knowledge, Vision, Context, Completion) with real-time streaming",
+                "Vision agent maps UI to coordinates for cursor control; resilient WebSocket layer",
+            ],
+            github: "",
+            live: "",
+            emoji: "",
+            color: "#8b5cf6",
         },
     ],
 
@@ -143,16 +248,15 @@ export const portfolioData = {
             ],
         },
         {
-            role: "Competitive Programming Coach",
-            company: "Indonesia",
+            role: "Competitive Programming Coach / Teacher",
+            company: "Indonesia (online / part-time)",
             location: "Indonesia",
             period: "September 2024 – June 2025",
-            type: "",
+            type: "Part-time (~1 year); ended when moving to Canada and workload increased",
             emoji: "",
             points: [
-                "Coached 100+ students in C++ algorithmic problem-solving and data structures",
-                "Designed online practice sessions focused on problem decomposition and optimization",
-                "Improved students' contest performance through mock contests and in-depth solution reviews",
+                "Taught 100+ students C++ and contest-style algorithms and data structures",
+                "Ran practice sessions, mock contests, and detailed solution reviews",
             ],
         },
     ],

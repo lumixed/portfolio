@@ -20,25 +20,42 @@ function buildSystemPrompt() {
         .join("\n");
 
     const projects = p.projects
-        .map((proj) =>
-            `- ${proj.title} (${proj.date}): ${proj.description}. Stack: ${proj.tech.join(", ")}. ` +
-            `GitHub: ${proj.github}${proj.live ? `. Live: ${proj.live}` : ""}`
-        )
+        .map((proj) => {
+            const event = proj.event ? ` [${proj.event}]` : "";
+            const stack = proj.tech?.length ? `Stack: ${proj.tech.join(", ")}.` : "";
+            const links = [proj.github && `GitHub: ${proj.github}`, proj.live && `Live: ${proj.live}`]
+                .filter(Boolean)
+                .join(" · ");
+            return `- ${proj.title}${event} (${proj.date}): ${proj.description} ${stack} ${links} Highlights: ${(proj.highlights || []).join(" | ")}`;
+        })
         .join("\n");
 
     const experience = p.experience
         .map((exp) =>
-            `- ${exp.role} at ${exp.company} (${exp.period}): ${exp.points.join(". ")}`
+            `- ${exp.role} at ${exp.company} (${exp.period})${exp.type ? ` — ${exp.type}` : ""}: ${exp.points.join(". ")}`
         )
         .join("\n");
 
     const education = p.education
-        .map((edu) =>
-            `- ${edu.degree} at ${edu.school} (${edu.period}), ${edu.gpa}`
-        )
+        .map((edu) => {
+            const notes = edu.transcriptNotes?.length ? `\n  Session notes: ${edu.transcriptNotes.join(" ")}` : "";
+            const courseBlock = edu.courses?.length ? `\n  Courses (including non-CS breadth): ${edu.courses.join("; ")}` : "";
+            return `- ${edu.degree} at ${edu.school} (${edu.period})${edu.yearStanding ? `, ${edu.yearStanding}` : ""}. ${edu.gpa}.${notes}${courseBlock}`;
+        })
         .join("\n");
 
-    return `You are ${p.shortName} (Jefferson Abraham Dermawan), a software engineer and student at UBC. \
+    const per = p.personal || {};
+    const cp = per.competitiveProgramming?.summary || "";
+    const schol = per.scholarship?.summary || "";
+    const photo = per.photography
+        ? `${per.photography.instagramHandle} — ${per.photography.instagramUrl}`
+        : "";
+
+    const hackWins = (p.hackathonWins || [])
+        .map((h) => `${h.name}${h.subtitle ? ` (${h.subtitle})` : ""}: ${h.prize}`)
+        .join("\n");
+
+    return `You are ${p.shortName} (${p.name}), a software engineer and Computer Science student at UBC. \
 You are speaking directly to visitors on your personal portfolio website. \
 You MUST speak in the FIRST PERSON (using "I", "me", "my"). \
 Answer questions naturally and conversationally, as if you are talking to a recruiter or a peer. Keep responses short (2-4 sentences max) unless detail is needed.
@@ -49,11 +66,24 @@ NAME: ${p.name}
 TITLE: ${p.title}
 BIO: ${p.bio}
 
+BACKGROUND & PERSONAL:
+- Born: ${per.dateOfBirth || "N/A"} (age ${per.age ?? "N/A"})
+- From: ${per.hometown || "Indonesia"} (${per.nationality || "Indonesian"})
+- High school: ${per.highSchool || "N/A"}
+- Hobbies: ${(per.hobbies || []).join(", ") || "N/A"}
+- Photography portfolio Instagram: ${photo || "N/A"}
+- Competitive programming: ${cp}
+- Scholarship / university choice: ${schol}
+- Note on work transition: ${per.whyCanada || ""}
+
 SKILLS:
 ${skills}
 
-PROJECTS:
+PROJECTS (most from hackathons):
 ${projects}
+
+HACKATHON PRIZES / RECOGNITION:
+${hackWins || "(none listed)"}
 
 EXPERIENCE:
 ${experience}
@@ -66,22 +96,21 @@ ${p.accomplishments.join("\n")}
 
 CONTACT:
 Email: ${p.contact.email}
+Phone: ${p.contact.phone}
 GitHub: ${p.contact.github}
 LinkedIn: ${p.contact.linkedin}
 Location: ${p.contact.location}
+Photography: ${p.contact.photographyInstagram || ""}
 
 RESUME: ${p.resumeUrl}
 
-PERSONALITY / PERSONAL TOUCHES (answer these naturally if asked):
-- Favorite music: lo-fi hip-hop, ambient electronic, and occasionally jazz — great for late-night coding sessions.
-- Favorite food: Indonesian food, especially nasi goreng and rendang (I miss home cooking!).
-- Hobbies outside coding: competitive gaming, reading about algorithms & math, and exploring Vancouver.
-- Fun fact: I competed in the Indonesian National Olympiad in Informatics at 17.
-- Favorite language: C++ for competitive programming, Python for everything else.
-- Favorite project: AwardScope — "it actually helps real students find money for school."
-- Philosophy: "Build things that solve real problems, not just things that look cool."
+PERSONALITY / TALKING POINTS (use when relevant):
+- I still lean on C++ and contest-style thinking for hard problems; Python for most product work.
+- I care about shipping useful tools (financial aid matching, safer routes, travel deals, onboarding).
+- Indonesian food and home (Bandung) are part of my story; Vancouver is where I study now.
 
 Always be warm, professional, and concise. \
+If asked for a GitHub link you do not have above, say you can share it on request. \
 If something isn't covered above, make a reasonable guess based on your profile. \
 Never say you don't know — always give a thoughtful answer.`;
 }
@@ -125,7 +154,26 @@ async function callGemini(query, history) {
 // -----------------------------------------------------------
 const RULES = [
     {
-        keywords: ["project", "built", "made", "portfolio", "app", "awardscope", "travelio"],
+        keywords: [
+            "project",
+            "built",
+            "made",
+            "portfolio",
+            "app",
+            "awardscope",
+            "travelio",
+            "hackathon",
+            "nw hacks",
+            "nwhacks",
+            "hack the coast",
+            "safe map",
+            "polterguide",
+            "polter",
+            "find my force",
+            "rf cop",
+            "gemini",
+            "produhacks",
+        ],
         resolve: () => ({
             type: "projects",
             heading: "Projects",
@@ -141,7 +189,19 @@ const RULES = [
         }),
     },
     {
-        keywords: ["experience", "job", "employ", "career", "company", "position", "intern"],
+        keywords: [
+            "experience",
+            "job",
+            "employ",
+            "career",
+            "company",
+            "position",
+            "intern",
+            "lintel",
+            "teaching assistant",
+            "coach",
+            "part-time",
+        ],
         resolve: () => ({
             type: "experience",
             heading: "Work Experience",
@@ -149,7 +209,18 @@ const RULES = [
         }),
     },
     {
-        keywords: ["contact", "email", "reach", "hire", "available", "connect", "linkedin"],
+        keywords: [
+            "contact",
+            "email",
+            "reach",
+            "hire",
+            "available",
+            "connect",
+            "linkedin",
+            "instagram",
+            "photography",
+            "shutteredfilm",
+        ],
         resolve: () => ({
             type: "contact",
             heading: "Get in Touch",
@@ -157,7 +228,30 @@ const RULES = [
         }),
     },
     {
-        keywords: ["education", "university", "school", "degree", "ubc", "study", "gpa", "course"],
+        keywords: [
+            "education",
+            "university",
+            "school",
+            "degree",
+            "ubc",
+            "study",
+            "gpa",
+            "course",
+            "grade",
+            "transcript",
+            "dean",
+            "bandung",
+            "indonesia",
+            "indonesian",
+            "scholarship",
+            "high school",
+            "smak",
+            "birthday",
+            "how old",
+            "age",
+            "hobby",
+            "travel",
+        ],
         resolve: () => ({
             type: "education",
             heading: "Education",
